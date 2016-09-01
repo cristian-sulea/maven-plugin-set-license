@@ -53,6 +53,8 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
     directoryScanner.setBasedir(new File(new File("pom.xml").getAbsolutePath()).getParentFile());
     directoryScanner.scan();
 
+    log.info("setting license header text on files:");
+
     for (String file : directoryScanner.getIncludedFiles()) {
       log.info(file);
 
