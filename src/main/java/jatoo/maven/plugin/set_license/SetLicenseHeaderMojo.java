@@ -9,15 +9,17 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 /**
  * The {@link Mojo} for <code>header</code> goal.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 0.1.2, September 1, 2016
+ * @version 2.0.0, September 2, 2016
  */
 @Mojo(name = "header")
 public class SetLicenseHeaderMojo extends AbstractMojo {
@@ -29,6 +31,10 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
   /** Default include patterns for directory scanner. */
   @Parameter(defaultValue = "src/**/*.java")
   private String[] includes;
+
+  /** Project the plugin is called from. */
+  @Component
+  private MavenProject project;
 
   @Override
   public final void execute() throws MojoExecutionException, MojoFailureException {
@@ -50,7 +56,7 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
 
     final DirectoryScanner directoryScanner = new DirectoryScanner();
     directoryScanner.setIncludes(includes);
-    directoryScanner.setBasedir(new File(new File("pom.xml").getAbsolutePath()).getParentFile());
+    directoryScanner.setBasedir(project.getBasedir());
     directoryScanner.scan();
 
     log.info("setting license header text on files:");
@@ -60,7 +66,7 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
 
       try {
 
-        String fileContent = FileUtils.readFileToString(new File(file));
+        String fileContent = FileUtils.readFileToString(new File(project.getBasedir(), file));
         int index = fileContent.indexOf("package ");
 
         int indexComments = fileContent.indexOf("/**");
@@ -70,12 +76,12 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
 
         fileContent = fileContent.substring(index);
 
-        File targetFolder = new File("target");
+        File targetFolder = new File(project.getBuild().getDirectory());
         if (!targetFolder.exists() && !targetFolder.mkdirs()) {
           throw new MojoExecutionException("error creating target folder");
         }
 
-        FileUtils.write(new File(file), licenseHeaderText + IOUtils.LINE_SEPARATOR + IOUtils.LINE_SEPARATOR + fileContent);
+        FileUtils.write(new File(project.getBasedir(), file), licenseHeaderText + IOUtils.LINE_SEPARATOR + IOUtils.LINE_SEPARATOR + fileContent);
       }
 
       catch (IOException e) {

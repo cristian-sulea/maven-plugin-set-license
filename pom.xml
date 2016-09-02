@@ -13,7 +13,7 @@
 	<packaging>maven-plugin</packaging>
 
 
-	<version>1.0.1</version>
+	<version>2.0.0</version>
 
 
 	<name>Maven Plugin SET License</name>
@@ -46,11 +46,11 @@
 		<skip.plugin.surefire>true</skip.plugin.surefire>
 		<skip.plugin.surefire.report>true</skip.plugin.surefire.report>
 		<skip.plugin.javadoc>true</skip.plugin.javadoc>
-<!-- 		<skip.plugin.checkstyle>true</skip.plugin.checkstyle> -->
+		<skip.plugin.checkstyle>true</skip.plugin.checkstyle>
 		<skip.plugin.checkstyle.report>true</skip.plugin.checkstyle.report>
-<!-- 		<skip.plugin.findbugs>true</skip.plugin.findbugs> -->
+		<skip.plugin.findbugs>true</skip.plugin.findbugs>
 		<skip.plugin.findbugs.report>true</skip.plugin.findbugs.report>
-<!-- 		<skip.plugin.pmd>true</skip.plugin.pmd> -->
+		<skip.plugin.pmd>true</skip.plugin.pmd>
 		<skip.plugin.pmd.report>true</skip.plugin.pmd.report>
 
 	</properties>
@@ -63,6 +63,12 @@
 			<artifactId>maven-plugin-api</artifactId>
 			<version>3.3.9</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>2.0.11</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
 			<artifactId>maven-plugin-annotations</artifactId>
