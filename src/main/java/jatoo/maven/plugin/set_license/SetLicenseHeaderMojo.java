@@ -61,9 +61,14 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
       try {
 
         String fileContent = FileUtils.readFileToString(new File(file));
-        if (!file.endsWith("package-info.java")) {
-          fileContent = fileContent.substring(fileContent.indexOf("package "));
+        int index = fileContent.indexOf("package ");
+
+        int indexComments = fileContent.indexOf("/**");
+        if (indexComments >= 0 && indexComments <= index) {
+          index = indexComments;
         }
+
+        fileContent = fileContent.substring(index);
 
         File targetFolder = new File("target");
         if (!targetFolder.exists() && !targetFolder.mkdirs()) {
