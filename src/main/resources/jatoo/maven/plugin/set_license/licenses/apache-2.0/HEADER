@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Cristian Sulea ( http://cristian.sulea.net )
+ * Copyright (C) ${copyright}
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/**
- * A Maven™ Plugin to set the license in a project (insert headers in files, copy license file).
- * 
- * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- */
-package jatoo.maven.plugin.set_license;

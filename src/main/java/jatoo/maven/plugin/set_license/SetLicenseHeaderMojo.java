@@ -1,18 +1,17 @@
 /*
  * Copyright (C) Cristian Sulea ( http://cristian.sulea.net )
  * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package jatoo.maven.plugin.set_license;
@@ -36,10 +35,18 @@ import org.codehaus.plexus.util.DirectoryScanner;
  * The {@link Mojo} for <code>header</code> goal.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 2.0.0, September 2, 2016
+ * @version 3.0, May 17, 2017
  */
 @Mojo(name = "header")
 public class SetLicenseHeaderMojo extends AbstractMojo {
+
+  /** The license to be used, a sub-folder in the 'licenses' folder. */
+  @Parameter
+  private String license;
+
+  /** The text to be used for ${copyright} parameter. */
+  @Parameter
+  private String copyright;
 
   /** The file containing the text to be used as the header. */
   @Parameter
@@ -57,16 +64,32 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
   public final void execute() throws MojoExecutionException, MojoFailureException {
     final Log log = getLog();
 
-    if (licenseHeader == null) {
-      throw new MojoExecutionException("The parameter 'licenseHeader' is missing.");
+    final String licenseHeaderText;
+
+    if (license == null) {
+
+      if (licenseHeader == null) {
+        throw new MojoExecutionException("both parameters 'license' and 'licenseHeader' are missing");
+      }
+
+      try {
+        licenseHeaderText = FileUtils.readFileToString(licenseHeader).trim();
+      } catch (IOException e) {
+        throw new MojoExecutionException("error reading license header file (" + licenseHeader + ")", e);
+      }
     }
 
-    final String licenseHeaderText;
-    try {
-      licenseHeaderText = FileUtils.readFileToString(licenseHeader).trim();
-    }
-    catch (IOException e) {
-      throw new MojoExecutionException("error reading license header", e);
+    else {
+
+      if (copyright == null) {
+        throw new MojoExecutionException("the parameter 'copyright' is missing");
+      }
+
+      try {
+        licenseHeaderText = IOUtils.toString(getClass().getResource("licenses/" + license + "/HEADER")).replaceAll("\\$\\{copyright\\}", copyright).trim();
+      } catch (IOException e) {
+        throw new MojoExecutionException("error reading license (" + license + ") header", e);
+      }
     }
 
     log.info("license header text: " + IOUtils.LINE_SEPARATOR + licenseHeaderText);
