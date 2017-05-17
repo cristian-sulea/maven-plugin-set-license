@@ -13,7 +13,7 @@
   <packaging>maven-plugin</packaging>
 
 
-  <version>3.0</version>
+  <version>3.1</version>
 
 
   <name>Maven Plugin SET License</name>
@@ -30,6 +30,10 @@
       <email>cristian.sulea.79@gmail.com</email>
       <url>http://cristian.sulea.net</url>
       <timezone>Europe/Bucharest</timezone>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
       <organization>http://cristian.sulea.net</organization>
       <organizationUrl>http://cristian.sulea.net</organizationUrl>
     </developer>
@@ -100,7 +104,7 @@
       <plugin>
         <groupId>net.sulea.cristian</groupId>
         <artifactId>maven-plugin-set-license</artifactId>
-        <version>3.0</version>
+        <version>3.1</version>
         <configuration>
           <license>apache-2.0</license>
           <copyright>Cristian Sulea ( http://cristian.sulea.net )</copyright>
