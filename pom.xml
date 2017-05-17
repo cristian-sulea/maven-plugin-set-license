@@ -31,6 +31,7 @@
       <url>http://cristian.sulea.net</url>
       <timezone>Europe/Bucharest</timezone>
       <roles>
+        <role>owner</role>
         <role>architect</role>
         <role>developer</role>
       </roles>
