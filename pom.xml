@@ -1,112 +1,115 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
 
-	<parent>
-		<groupId>net.sulea.cristian</groupId>
-		<artifactId>maven-project-parent-java</artifactId>
-		<relativePath>../maven-project-parent-java/pom.xml</relativePath>
-		<version>1.5.0</version>
-	</parent>
+  <parent>
+    <groupId>net.sulea.cristian</groupId>
+    <artifactId>maven-project-parent-java</artifactId>
+    <relativePath>../maven-project-parent-java/pom.xml</relativePath>
+    <version>1.5.0</version>
+  </parent>
 
-	<artifactId>maven-plugin-set-license</artifactId>
-	<packaging>maven-plugin</packaging>
-
-
-	<version>3.0</version>
+  <artifactId>maven-plugin-set-license</artifactId>
+  <packaging>maven-plugin</packaging>
 
 
-	<name>Maven Plugin SET License</name>
-	<description>A Maven™ Plugin to set the license in a project (insert headers in files, copy license file).</description>
-	<url>http://cristian.sulea.net/projects/maven-plugin-set-license/</url>
-
-	<inceptionYear>2016</inceptionYear>
+  <version>3.0</version>
 
 
-	<developers>
-		<developer>
-			<id>cristian.sulea</id>
-			<name>Cristian Sulea</name>
-			<email>cristian.sulea.79@gmail.com</email>
-			<url>http://cristian.sulea.net</url>
-		</developer>
-	</developers>
+  <name>Maven Plugin SET License</name>
+  <description>A Maven™ Plugin to set the license in a project (insert headers in files, copy license file).</description>
+  <url>http://cristian.sulea.net/projects/maven-plugin-set-license/</url>
+
+  <inceptionYear>2016</inceptionYear>
 
 
-	<scm>
-		<connection>scm:git:git@github.com:cristian-sulea/maven-plugin-set-license.git</connection>
-		<developerConnection>scm:git:git@github.com:cristian-sulea/maven-plugin-set-license.git</developerConnection>
-		<url>https://github.com/cristian-sulea/maven-plugin-set-license</url>
-	</scm>
+  <developers>
+    <developer>
+      <id>cristian.sulea</id>
+      <name>Cristian Sulea</name>
+      <email>cristian.sulea.79@gmail.com</email>
+      <url>http://cristian.sulea.net</url>
+      <timezone>Europe/Bucharest</timezone>
+      <organization>http://cristian.sulea.net</organization>
+      <organizationUrl>http://cristian.sulea.net</organizationUrl>
+    </developer>
+  </developers>
 
 
-	<properties>
-
-		<skip.plugin.source>true</skip.plugin.source>
-		<skip.plugin.surefire>true</skip.plugin.surefire>
-		<skip.plugin.surefire.report>true</skip.plugin.surefire.report>
-		<skip.plugin.javadoc>true</skip.plugin.javadoc>
-		<skip.plugin.checkstyle>true</skip.plugin.checkstyle>
-		<skip.plugin.checkstyle.report>true</skip.plugin.checkstyle.report>
-		<skip.plugin.findbugs>true</skip.plugin.findbugs>
-		<skip.plugin.findbugs.report>true</skip.plugin.findbugs.report>
-		<skip.plugin.pmd>true</skip.plugin.pmd>
-		<skip.plugin.pmd.report>true</skip.plugin.pmd.report>
-
-	</properties>
+  <scm>
+    <connection>scm:git:git@github.com:cristian-sulea/maven-plugin-set-license.git</connection>
+    <developerConnection>scm:git:git@github.com:cristian-sulea/maven-plugin-set-license.git</developerConnection>
+    <url>https://github.com/cristian-sulea/maven-plugin-set-license</url>
+  </scm>
 
 
-	<dependencies>
+  <properties>
 
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>3.3.9</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-project</artifactId>
-			<version>2.0.11</version>
-		</dependency>
+    <skip.plugin.source>true</skip.plugin.source>
+    <skip.plugin.surefire>true</skip.plugin.surefire>
+    <skip.plugin.surefire.report>true</skip.plugin.surefire.report>
+    <skip.plugin.javadoc>true</skip.plugin.javadoc>
+    <skip.plugin.checkstyle>true</skip.plugin.checkstyle>
+    <skip.plugin.checkstyle.report>true</skip.plugin.checkstyle.report>
+    <skip.plugin.findbugs>true</skip.plugin.findbugs>
+    <skip.plugin.findbugs.report>true</skip.plugin.findbugs.report>
+    <skip.plugin.pmd>true</skip.plugin.pmd>
+    <skip.plugin.pmd.report>true</skip.plugin.pmd.report>
 
-		<dependency>
-			<groupId>org.apache.maven.plugin-tools</groupId>
-			<artifactId>maven-plugin-annotations</artifactId>
-			<version>3.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
-		</dependency>
-
-	</dependencies>
+  </properties>
 
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.2</version>
-				<configuration>
-					<goalPrefix>set-license</goalPrefix>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>net.sulea.cristian</groupId>
-				<artifactId>maven-plugin-set-license</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<license>apache-2.0</license>
-					<copyright>Cristian Sulea ( http://cristian.sulea.net )</copyright>
-<!-- 					<licenseHeader>../maven-plugin-set-license/src/main/resources/jatoo/maven/plugin/set_license/licenses/gpl-3.0/HEADER</licenseHeader> -->
-<!-- 					<licenseFile>../maven-plugin-set-license/src/main/resources/jatoo/maven/plugin/set_license/licenses/gpl-3.0/LICENSE</licenseFile> -->
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <dependencies>
+
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>3.3.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-project</artifactId>
+      <version>2.0.11</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>3.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+
+  </dependencies>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>3.2</version>
+        <configuration>
+          <goalPrefix>set-license</goalPrefix>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>net.sulea.cristian</groupId>
+        <artifactId>maven-plugin-set-license</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <license>apache-2.0</license>
+          <copyright>Cristian Sulea ( http://cristian.sulea.net )</copyright>
+          <!-- <licenseHeader>../maven-plugin-set-license/src/main/resources/jatoo/maven/plugin/set_license/licenses/gpl-3.0/HEADER</licenseHeader> -->
+          <!-- <licenseFile>../maven-plugin-set-license/src/main/resources/jatoo/maven/plugin/set_license/licenses/gpl-3.0/LICENSE</licenseFile> -->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 
 </project>
