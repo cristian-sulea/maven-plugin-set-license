@@ -36,10 +36,14 @@ import org.apache.maven.project.MavenProject;
  * The {@link Mojo} for <code>file</code> goal.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 3.0, May 17, 2017
+ * @version 4.0, February 27, 2019
  */
 @Mojo(name = "file")
 public class SetLicenseFileMojo extends AbstractMojo {
+
+  /** To skip or not to skip. */
+  @Parameter
+  private boolean skip;
 
   /** The license to be used, a sub-folder in the 'licenses' folder. */
   @Parameter
@@ -56,6 +60,11 @@ public class SetLicenseFileMojo extends AbstractMojo {
   @Override
   public final void execute() throws MojoExecutionException, MojoFailureException {
     final Log log = getLog();
+
+    if (skip) {
+      log.info("Skipping...");
+      return;
+    }
 
     final URL licenseResource;
 

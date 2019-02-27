@@ -35,10 +35,14 @@ import org.codehaus.plexus.util.DirectoryScanner;
  * The {@link Mojo} for <code>header</code> goal.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 3.0, May 17, 2017
+ * @version 4.0, February 27, 2019
  */
 @Mojo(name = "header")
 public class SetLicenseHeaderMojo extends AbstractMojo {
+
+  /** To skip or not to skip. */
+  @Parameter
+  private boolean skip;
 
   /** The license to be used, a sub-folder in the 'licenses' folder. */
   @Parameter
@@ -63,6 +67,11 @@ public class SetLicenseHeaderMojo extends AbstractMojo {
   @Override
   public final void execute() throws MojoExecutionException, MojoFailureException {
     final Log log = getLog();
+
+    if (skip) {
+      log.info("Skipping...");
+      return;
+    }
 
     final String licenseHeaderText;
 
